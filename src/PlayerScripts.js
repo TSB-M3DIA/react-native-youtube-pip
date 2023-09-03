@@ -33,13 +33,13 @@ true;
 window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'getAvailablePlaybackRates', data: player.getAvailablePlaybackRates()}));
 true;
 `,
-  enablePiP: `
-var videoElement = document.querySelector('video');
-if (videoElement && videoElement.webkitSetPresentationMode) {
-    videoElement.webkitSetPresentationMode('picture-in-picture');
+  enablePiP: `if (document.pictureInPictureEnabled) {
+  document.getElementById("videoElementId").requestPictureInPicture();
+  window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'enablePiP', data: 'PiP Enabled'}));
+} else {
+  window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'enablePiP', data: 'PiP Not Supported'}));
 }
-true;
-`,
+true;`,
 
   setVolume: volume => {
     return `player.setVolume(${volume}); true;`;
