@@ -33,6 +33,13 @@ true;
 window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'getAvailablePlaybackRates', data: player.getAvailablePlaybackRates()}));
 true;
 `,
+  enablePiP: `
+var videoElement = document.querySelector('video');
+if (videoElement && videoElement.webkitSetPresentationMode) {
+    videoElement.webkitSetPresentationMode('picture-in-picture');
+}
+true;
+`,
 
   setVolume: volume => {
     return `player.setVolume(${volume}); true;`;
