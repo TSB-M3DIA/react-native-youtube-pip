@@ -115,7 +115,6 @@ const YoutubeIframe = (props, ref) => {
         );
       },
       enablePiP: () => {
-        alert('triggering enablePiP injection');
         webViewRef.current.injectJavaScript(PLAYER_FUNCTIONS.enablePiP);
       },
     }),
@@ -195,7 +194,7 @@ const YoutubeIframe = (props, ref) => {
             onPlaybackRateChange(message.data);
             break;
           case 'enablePiP':
-            alert('changing status');
+            alert(message.data);
             onPiPStatusChange(message.data);
             break;
           default:
