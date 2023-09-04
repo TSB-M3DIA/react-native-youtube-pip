@@ -193,7 +193,7 @@ const YoutubeIframe = (props, ref) => {
             onPlaybackRateChange(message.data);
             break;
           case 'enablePiP':
-            onPlaybackRateChange(message.data);
+            onPiPStatusChange(message.data);
             break;
           default:
             eventEmitter.current.emit(message.eventType, message.data);
@@ -210,6 +210,7 @@ const YoutubeIframe = (props, ref) => {
       onFullScreenChange,
       onPlaybackRateChange,
       onPlaybackQualityChange,
+      onPiPStatusChange,
     ],
   );
 

@@ -9,6 +9,7 @@ export enum PLAYER_STATES {
   UNSTARTED = 'unstarted',
   BUFFERING = 'buffering',
   VIDEO_CUED = 'video cued',
+  PiP_STATUS = 'PiP status',
 }
 
 export enum PLAYER_ERRORS {
