@@ -222,6 +222,7 @@ export const MAIN_SCRIPT = (
             'onError': onPlayerError,
             'onPlaybackQualityChange': onPlaybackQualityChange,
             'onPlaybackRateChange': onPlaybackRateChange,
+            'onPiPStatusChange': onPiPStatusChange,
           }
         });
       }
