@@ -34,28 +34,46 @@ window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'getAvailablePl
 true;
 `,
   enablePiP: `
-const video = document.getElementsByTagName('video')[0];
-if (video) {
-  video.requestPictureInPicture().then(() => {
-    const message = {
+(function() {
+  let video;
+
+  // Try to find video in nested iframes
+  const iframes = document.getElementsByTagName('iframe');
+  for(let i=0; i<iframes.length; i++) {
+    const iframeVideos = iframes[i].contentDocument.getElementsByTagName('video');
+    if(iframeVideos.length > 0) {
+      video = iframeVideos[0];
+      break;
+    }
+  }
+
+  // If not found in iframes, try to get it from the main document
+  if (!video) {
+    video = document.getElementsByTagName('video')[0];
+  }
+
+  // Request PiP and send a message based on the result
+  if (video) {
+    video.requestPictureInPicture()
+      .then(() => {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          eventType: 'enablePiP',
+          data: 'PiP initiated successfully.'
+        }));
+      })
+      .catch(error => {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          eventType: 'enablePiP',
+          data: 'PiP initiation failed: ' + error.message
+        }));
+      });
+  } else {
+    window.ReactNativeWebView.postMessage(JSON.stringify({
       eventType: 'enablePiP',
-      data: 'PiP initiated successfully.'
-    };
-    window.ReactNativeWebView.postMessage(JSON.stringify(message));
-  }).catch(error => {
-    const message = {
-      eventType: 'enablePiP',
-      data: 'PiP initiation failed: ' + error.message
-    };
-    window.ReactNativeWebView.postMessage(JSON.stringify(message));
-  });
-} else {
-  const message = {
-    eventType: 'enablePiP',
-    data: 'No video element found.'
-  };
-  window.ReactNativeWebView.postMessage(JSON.stringify(message));
-};
+      data: 'No video element found.'
+    }));
+  }
+})();
 true;`,
 
   setVolume: volume => {
