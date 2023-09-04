@@ -129,6 +129,9 @@ export interface YoutubeIframeProps {
    * callback for when the fullscreen option is clicked in the player. It signals the new fullscreen state of the player.
    */
   onFullScreenChange?: (status: boolean) => void;
+
+  onPiPStatusChange?: () => void;
+
   /**
    * callback for when the video playback quality changes. It might signal a change in the viewer's playback environment.
    */
