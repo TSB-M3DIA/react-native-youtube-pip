@@ -56,7 +56,7 @@ if (video) {
   };
   window.ReactNativeWebView.postMessage(JSON.stringify(message));
 };
-true`,
+true;`,
 
   setVolume: volume => {
     return `player.setVolume(${volume}); true;`;
