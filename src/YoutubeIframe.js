@@ -173,6 +173,7 @@ const YoutubeIframe = (props, ref) => {
     event => {
       try {
         const message = JSON.parse(event.nativeEvent.data);
+        if (message.eventType === 'enablePiP') alert(message.eventType);
 
         switch (message.eventType) {
           case 'fullScreenChange':
