@@ -192,6 +192,9 @@ const YoutubeIframe = (props, ref) => {
           case 'playbackRateChange':
             onPlaybackRateChange(message.data);
             break;
+          case 'enablePiP':
+            onPlaybackRateChange(message.data);
+            break;
           default:
             eventEmitter.current.emit(message.eventType, message.data);
             break;
