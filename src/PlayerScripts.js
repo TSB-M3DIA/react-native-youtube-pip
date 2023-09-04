@@ -33,9 +33,10 @@ true;
 window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'getAvailablePlaybackRates', data: player.getAvailablePlaybackRates()}));
 true;
 `,
-  enablePiP: `document.getElementsByTagName('video')[0].requestPictureInPicture();
-  window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'enablePiP', data: 'PiP Enabled'}));
-true;`,
+  enablePiP: `
+window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'enablePiP', data: 'PiP Enabled'}));
+true;
+`,
 
   setVolume: volume => {
     return `player.setVolume(${volume}); true;`;
