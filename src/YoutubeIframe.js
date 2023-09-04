@@ -49,7 +49,7 @@ const YoutubeIframe = (props, ref) => {
     onFullScreenChange = _status => {},
     onPlaybackQualityChange = _quality => {},
     onPlaybackRateChange = _playbackRate => {},
-    onPiPStatusChange,
+    onPiPStatusChange = _status => {},
   } = props;
 
   const [playerReady, setPlayerReady] = useState(false);
