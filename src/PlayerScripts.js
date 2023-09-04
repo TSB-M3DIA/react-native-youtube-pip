@@ -33,12 +33,8 @@ true;
 window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'getAvailablePlaybackRates', data: player.getAvailablePlaybackRates()}));
 true;
 `,
-  enablePiP: `if (document.getElementsByTagName('video')[0].requestPictureInPicture()) {
-  document.getElementsByTagName('video')[0].requestPictureInPicture();
+  enablePiP: `document.getElementsByTagName('video')[0].requestPictureInPicture();
   window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'enablePiP', data: 'PiP Enabled'}));
-} else {
-  window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'enablePiP', data: 'PiP Not Supported'}));
-}
 true;`,
 
   setVolume: volume => {
