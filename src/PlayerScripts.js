@@ -34,7 +34,16 @@ window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'getAvailablePl
 true;
 `,
   enablePiP: `
-window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'enablePiP', data: 'PiP Enabled'}));
+const video = document.getElementsByTagName('video')[0];
+if (video) {
+  video.requestPictureInPicture().then(() => {
+    window.ReactNativeWebView.postMessage('PiP initiated successfully.');
+  }).catch(error => {
+    window.ReactNativeWebView.postMessage('PiP initiation failed: ' + error.message);
+  });
+} else {
+  window.ReactNativeWebView.postMessage('No video element found.');
+};
 true;
 `,
 
