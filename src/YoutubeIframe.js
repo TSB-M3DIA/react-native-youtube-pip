@@ -114,7 +114,8 @@ const YoutubeIframe = (props, ref) => {
         );
       },
       enablePiP: () => {
-        webViewRef.current.injectJavaScript(PLAYER_FUNCTIONS.enablePiP);
+        // webViewRef.current.injectJavaScript(PLAYER_FUNCTIONS.enablePiP);
+        alert('testies');
       },
     }),
     [],
