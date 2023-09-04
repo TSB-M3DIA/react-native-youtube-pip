@@ -34,17 +34,29 @@ window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'getAvailablePl
 true;
 `,
   enablePiP: `
-  const video = document.getElementsByTagName('video')[0];
-  if (video) {
-    video.requestPictureInPicture().then(() => {
-      window.ReactNativeWebView.postMessage('PiP initiated successfully.');
-    }).catch(error => {
-      window.ReactNativeWebView.postMessage('PiP initiation failed: ' + error.message);
-    });
-  } else {
-    window.ReactNativeWebView.postMessage('No video element found.');
-  }
-`,
+const video = document.getElementsByTagName('video')[0];
+if (video) {
+  video.requestPictureInPicture().then(() => {
+    const message = {
+      eventType: 'enablePiP',
+      data: 'PiP initiated successfully.'
+    };
+    window.ReactNativeWebView.postMessage(JSON.stringify(message));
+  }).catch(error => {
+    const message = {
+      eventType: 'enablePiP',
+      data: 'PiP initiation failed: ' + error.message
+    };
+    window.ReactNativeWebView.postMessage(JSON.stringify(message));
+  });
+} else {
+  const message = {
+    eventType: 'enablePiP',
+    data: 'No video element found.'
+  };
+  window.ReactNativeWebView.postMessage(JSON.stringify(message));
+};
+true`,
 
   setVolume: volume => {
     return `player.setVolume(${volume}); true;`;
