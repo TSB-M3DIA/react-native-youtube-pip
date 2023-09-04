@@ -40,10 +40,12 @@ true;
   // Try to find video in nested iframes
   const iframes = document.getElementsByTagName('iframe');
   for(let i=0; i<iframes.length; i++) {
-    const iframeVideos = iframes[i].contentDocument.getElementsByTagName('video');
-    if(iframeVideos.length > 0) {
-      video = iframeVideos[0];
-      break;
+    if(iframes[i].contentDocument) {
+      const iframeVideos = iframes[i].contentDocument.getElementsByTagName('video');
+      if(iframeVideos.length > 0) {
+        video = iframeVideos[0];
+        break;
+      }
     }
   }
 
