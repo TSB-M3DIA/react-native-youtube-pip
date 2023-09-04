@@ -237,6 +237,10 @@ export const MAIN_SCRIPT = (
       function onPlaybackQualityChange(event) {
         window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'playerQualityChange', data: event.data}))
       }
+      
+      function onPiPStatusChange(event) {
+        window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'enablePiP', data: event.data}))
+      }
 
       function onPlayerReady(event) {
         window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'playerReady'}))
