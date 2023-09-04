@@ -34,48 +34,28 @@ window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'getAvailablePl
 true;
 `,
   enablePiP: `
-(function() {
-  let video;
-
-  // Try to find video in nested iframes
-  const iframes = document.getElementsByTagName('iframe');
-  for(let i=0; i<iframes.length; i++) {
-    if(iframes[i].contentDocument) {
-      const iframeVideos = iframes[i].contentDocument.getElementsByTagName('video');
-      if(iframeVideos.length > 0) {
-        video = iframeVideos[0];
-        break;
-      }
-    }
-  }
-
-  // If not found in iframes, try to get it from the main document
-  if (!video) {
-    video = document.getElementsByTagName('video')[0];
-  }
-
-  // Request PiP and send a message based on the result
-  if (video) {
-    video.requestPictureInPicture()
-      .then(() => {
+  (function() {
+    const video = document.querySelector('video');
+    if (video) {
+      video.requestPictureInPicture().then(() => {
         window.ReactNativeWebView.postMessage(JSON.stringify({
           eventType: 'enablePiP',
           data: 'PiP initiated successfully.'
         }));
-      })
-      .catch(error => {
+      }).catch(error => {
         window.ReactNativeWebView.postMessage(JSON.stringify({
           eventType: 'enablePiP',
           data: 'PiP initiation failed: ' + error.message
         }));
       });
-  } else {
-    window.ReactNativeWebView.postMessage(JSON.stringify({
-      eventType: 'enablePiP',
-      data: 'No video element found.'
-    }));
-  }
-})();
+    } else {
+      window.ReactNativeWebView.postMessage(JSON.stringify({
+        eventType: 'enablePiP',
+        data: 'No video element found.'
+      }));
+    }
+    return true;  // added as per the error you shared
+  })();
 true;`,
 
   setVolume: volume => {
